@@ -1,5 +1,17 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+
+import { CrowdFundingProvider }  from "../context/CrowdFunding";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,11 +32,34 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <CrowdFundingProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NavigationMenu>
+          <NavigationMenuList>
+          <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            <Link href="/createlawsuit" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Open Lawsuit
+                </NavigationMenuLink>
+              </Link>
+            <NavigationMenuItem>
+              <Link href="/admin" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Admin
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
         {children}
       </body>
+      </CrowdFundingProvider>
     </html>
   );
 }
