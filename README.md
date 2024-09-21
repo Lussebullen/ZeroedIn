@@ -38,10 +38,9 @@ ETH Global Project
 │
 ├── /infra                      # Infrastructure files for Docker Compose
 │   ├── docker-compose.yml      # Main Docker Compose file
-│   ├── env                     # Environment variables for different services
+│   ├── .env                    # Environment variables for different services
 │   └── init.sql                # Postgres initialization script
 │
-├── .env                        # Global environment variables
 ├── README.md                   # Project documentation
 └── .gitignore                  # Git ignore file
 ```

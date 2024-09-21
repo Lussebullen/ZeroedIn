@@ -1,0 +1,44 @@
+services:
+  backend:
+    build: ../backend
+    container_name: backend
+    ports:
+      - "8000:80"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  # frontend:
+  #   build: ../frontend
+  #   container_name: frontend
+  #   ports:
+  #     - "3000:3000"
+  
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  # mina-blockchain:
+  #   build: ../blockchain
+  #   container_name: mina-blockchain
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
