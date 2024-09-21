@@ -25,8 +25,8 @@ def on_startup():
 
 # Create a new lawsuit
 @app.post("/lawsuit/")
-def create_lawsuit(owner: str, title: str, description: str, db: Session = Depends(get_db)):
-    db_lawsuit = Lawsuit(owner=owner, title=title, amount_collected=0, description=description)
+def create_lawsuit(lawsuit: Lawsuit, db: Session = Depends(get_db)):
+    db_lawsuit = Lawsuit(owner=lawsuit.owner, title=lawsuit.title, amount_collected=0, description=lawsuit.description)
     db.add(db_lawsuit)
     db.commit()
     db.refresh(db_lawsuit)
