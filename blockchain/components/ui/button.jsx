@@ -47,7 +47,6 @@ const Button = React.forwardRef(({ className, variant, size, asChild = false, ..
     (<Comp
       className={cn(buttonVariants({ variant, size, className }))}
       ref={ref}
-      onClick = {connectWallet}
       {...props} />)
   );
 })
