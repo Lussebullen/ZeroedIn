@@ -16,11 +16,14 @@ export default function LawsuitForm() {
     e.preventDefault()
     if (title.trim() && description.trim()) {
       // Here you would typically send the data to your server
-      console.log('Submitting:', JSON.stringify({ owner:title, title:title, description:description }))
-      fetch('http://localhost:8000/lawsuit', {
+      fetch('http://localhost:8000/lawsuit/', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ owner:title, title:title, description:description }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          owner: "test-owner",
+          title: title,
+          description: description
+        }),
       })
       toast({
         title: "Lawsuit Submitted",

@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from .models import Lawsuit, Donor
 from .database import get_db, Base, engine
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -23,9 +24,15 @@ def on_startup():
     # Create all tables in the database
     Base.metadata.create_all(bind=engine)
 
+# Pydantic model for lawsuit data
+class LawsuitCreate(BaseModel):
+    owner: str
+    title: str
+    description: str
+
 # Create a new lawsuit
 @app.post("/lawsuit/")
-def create_lawsuit(lawsuit: Lawsuit, db: Session = Depends(get_db)):
+def create_lawsuit(lawsuit: LawsuitCreate, db: Session = Depends(get_db)):
     db_lawsuit = Lawsuit(owner=lawsuit.owner, title=lawsuit.title, amount_collected=0, description=lawsuit.description)
     db.add(db_lawsuit)
     db.commit()
