@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Web3Modal from "web3modal";
-const ethers = require("ethers")
+const { ethers } = require("ethers")
 
 import { CrowdFundingABI, CrowdFundingAddress } from "./constants";
 
 const fetchContract = (signerOrProvider) => {
-  return new ethers.Contract(CrowdFundingAddress, CrowdFundingABI, signerOrProvider);
+    return new ethers.Contract(CrowdFundingAddress, CrowdFundingABI, signerOrProvider);
 }
 
 export const CrowdFundingContext = React.createContext();
@@ -41,7 +41,7 @@ export const CrowdFundingProvider = ({ children }) => {
 
         const parsedCampaigns = campaigns.map((campaign, i) => ({
             owner: campaign.owner,
-            title: campaign.title, 
+            title: campaign.title,
             description: campaign.description,
             target: ethers.utils.formatEther(campaign.target.toString()),
             deadline: campaign.deadline.toNumber(),
@@ -63,10 +63,10 @@ export const CrowdFundingProvider = ({ children }) => {
         const currentAccount = accounts[0];
 
         const filteredCampaigns = allCampaigns.filter(campaign => campaign.owner === currentAccount);
-        
+
         const userData = filteredCampaigns.map((campaign, i) => ({
             owner: campaign.owner,
-            title: campaign.title, 
+            title: campaign.title,
             description: campaign.description,
             target: ethers.utils.formatEther(campaign.target.toString()),
             deadline: campaign.deadline.toNumber(),
@@ -83,7 +83,7 @@ export const CrowdFundingProvider = ({ children }) => {
         const signer = provider.getSigner();
         const contract = fetchContract(signer);
 
-        const campaignData = await contract.donateToCampaign(campaignId, { 
+        const campaignData = await contract.donateToCampaign(campaignId, {
             value: ethers.utils.parseEther(amount),
         });
 
@@ -113,7 +113,7 @@ export const CrowdFundingProvider = ({ children }) => {
         try {
             if (!window.ethereum)
                 return setOpenError(true), setError("Install MetaMask");
-        
+
             const accounts = await window.ethereum.request({
                 method: "eth_accounts",
             });
