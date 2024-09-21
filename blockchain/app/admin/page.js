@@ -13,12 +13,10 @@ import {
 
 import { CrowdFundingProvider }  from "../../context/CrowdFunding";
 
-export default function Home() {
+export default function Admin() {
   return (
     <>
-    <CrowdFundingProvider>
     whats up bossman
-    </CrowdFundingProvider>
     </>
   );
 }
