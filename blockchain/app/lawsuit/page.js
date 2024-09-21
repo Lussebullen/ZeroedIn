@@ -26,6 +26,7 @@ export default function InvestButton() {
 
             // Request user to connect their wallet
             await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log("STUCK above");
 
             // Earlier in v5 provider = new ethers.providers.Web3Provider(window.ethereum)
             // In v6: provider = new ethers.BrowserProvider(window.ethereum)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Double
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -8,7 +8,7 @@ class Lawsuit(Base):
     id = Column(Integer, primary_key=True, index=True)
     owner = Column(String, index=True)
     title = Column(String, index=True)
-    amount_collected = Column(Integer, index=True)
+    amount_collected = Column(Double, index=True)
     description = Column(String, index=True)
     active = Column(Boolean, default=True)
 

@@ -53,15 +53,21 @@ def get_lawsuit(lawsuit_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Lawsuit not found")
     return lawsuit
 
+# Pydantic model for lawsuit data
+class DonationModel(BaseModel):
+    lawsuit_id: int
+    amount: float
+    wallet_id: str
+
 # Donate to a lawsuit, increasing the amount collected, and creating a new donor
 @app.put("/lawsuit/{lawsuit_id}/donate")
-def donate_to_lawsuit(lawsuit_id: int, amount: int, wallet_id: str, db: Session = Depends(get_db)):
-    lawsuit = db.query(Lawsuit).filter(Lawsuit.id == lawsuit_id).first()
+def donate_to_lawsuit(donor: DonationModel, db: Session = Depends(get_db)):
+    lawsuit = db.query(Lawsuit).filter(Lawsuit.id == donor.lawsuit_id).first()
     if lawsuit is None:
         raise HTTPException(status_code=404, detail="Lawsuit not found")
-    lawsuit.amount_collected += amount
+    lawsuit.amount_collected += donor.amount
     # Save associated donor to database
-    donor = Donor(wallet_id=wallet_id, amount_donated=amount, lawsuit_id=lawsuit_id)
+    donor = Donor(wallet_id=donor.wallet_id, amount_donated=donor.amount, lawsuit_id=donor.lawsuit_id)
     db.add(donor)
     db.commit()
     db.refresh(lawsuit)
