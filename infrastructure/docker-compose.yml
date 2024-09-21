@@ -8,12 +8,6 @@ services:
       - .env
     depends_on:
       - postgres
-
-  frontend:
-    build: ../frontend
-    container_name: frontend
-    ports:
-      - "3000:80"
     networks:
       - app-network
   
