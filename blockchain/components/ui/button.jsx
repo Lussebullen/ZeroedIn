@@ -40,16 +40,30 @@ const buttonVariants = cva(
   }
 )
 
-const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
+const ButtonConnect = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
   const { currentAccount, connectWallet } = useContext(CrowdFundingContext);
   const Comp = asChild ? Slot : "button"
   return (
     (<Comp
       className={cn(buttonVariants({ variant, size, className }))}
       ref={ref}
+      onClick={connectWallet}
       {...props} />)
   );
 })
-Button.displayName = "Button"
+ButtonConnect.displayName = "ButtonConnect"
 
-export { Button, buttonVariants }
+const ButtonDonate = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
+  const { currentAccount, donate } = useContext(CrowdFundingContext);
+  const Comp = asChild ? Slot : "button"
+  return (
+    (<Comp
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref}
+      onClick={donate}
+      {...props} />)
+  );
+})
+ButtonDonate.displayName = "ButtonConnect"
+
+export { ButtonConnect, ButtonDonate, buttonVariants }

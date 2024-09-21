@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import { CrowdFundingProvider }  from "../context/CrowdFunding";
+import { ButtonConnect } from "@/components/ui/button";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -57,6 +59,7 @@ export default function RootLayout({ children }) {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        <ButtonConnect>Connect Wallet</ButtonConnect>
         {children}
       </body>
       </CrowdFundingProvider>

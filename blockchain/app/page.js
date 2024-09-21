@@ -6,7 +6,6 @@ import { CrowdFundingProvider }  from "../context/CrowdFunding";
 export default function Home() {
   return (
     <>
-    <Button/>
     Welcome home
     </>
   );
