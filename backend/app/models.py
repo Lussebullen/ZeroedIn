@@ -21,7 +21,7 @@ class Donor(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     wallet_id = Column(String, index=True)
-    amount_donated = Column(Integer)
+    amount_donated = Column(Double)
     lawsuit_id = Column(Integer, ForeignKey("lawsuit.id"))  # ForeignKey to the Lawsuit table
 
     # Define a back-reference to the Lawsuit model
