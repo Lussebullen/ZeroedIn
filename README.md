@@ -1,7 +1,14 @@
 # ZeroedIn
 ETH Global Project
 
+## How to run
 
+Navigate to the infrastructure folder and run
+```bash
+docker compose up
+```
+
+## Project Structure
 ```
 /ZeroedIn
 │
