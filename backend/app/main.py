@@ -1,9 +1,22 @@
 from fastapi import Depends, HTTPException, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from .models import Lawsuit, Donor
 from .database import get_db, Base, engine
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",  # Replace with your React frontend URL
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows requests from specified origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.on_event("startup")
 def on_startup():
